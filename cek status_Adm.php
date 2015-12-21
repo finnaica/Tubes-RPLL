@@ -9,7 +9,8 @@ if(isset($_SESSION['login_admin'])){
 <title>Untitled Docw.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiument</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>SI Military - Administrator</title>
 </head>
 
 <body>
@@ -55,19 +56,20 @@ if(isset($_SESSION['login_admin'])){
     </table></form></td>
   </tr>
   <tr>
-    <td colspan="2" align="center" bgcolor="#DEE8FF"><table width="70%" border="0" align="center" cellpadding="4" cellspacing="0">
+    <td colspan="2" align="center" bgcolor="#DEE8FF"><table width="70%" border="4" align="center" cellpadding="4" cellspacing="0">
       <tr>
         <td align="center"><font size=2 face="Broadway, Geneva, sans-serif" color="#666666">No Transaksi</font></td>
         <td align="center"><font size=2 face="Broadway, Geneva, sans-serif" color="#666666">Tgl</font></td>
         <td align="center"><font size=2 face="Broadway, Geneva, sans-serif" color="#666666">Status</font></td>
         <td align="center"><font size=2 face="Broadway, Geneva, sans-serif" color="#666666">Aksi</font></td>
         <td align="center"><font size=2 face="Broadway, Geneva, sans-serif" color="#666666">Detail Barang</font></td>
+        <td align="center"><font size=2 face="Broadway, Geneva, sans-serif" color="#666666">Biaya Kirim</font></td>
         <td align="center"><font size=2 face="Broadway, Geneva, sans-serif" color="#666666">Total Bayar</font></td>
       </tr>
       <?php
-	  $sql = "select t.no_transaksi, t.tgl_transaksi, t.status, d.kode_barang, b.nama_barang, b.harga, b.harga*d.jumlah, d.jumlah from transaksi t join detail_transaksi d on t.no_transaksi=d.no_transaksi join barang b on d.kode_barang=b.kode_barang";
+	  $sql = "select t.no_transaksi, t.tgl_transaksi, t.status, d.kode_barang, b.nama_barang, b.harga, k.harga, (b.harga*d.jumlah)+k.harga, b.harga*d.jumlah, d.jumlah from transaksi t join detail_transaksi d on t.no_transaksi=d.no_transaksi join barang b on d.kode_barang=b.kode_barang join pembeli p on p.kode_pembeli = t.kode_pembeli join kurir k on k.kode_kurir = p.kode_kurir";
 	  if(isset($_GET['q'])){
-		$sql = "select t.no_transaksi, t.tgl_transaksi, t.status, d.kode_barang, b.nama_barang, b.harga, b.harga*d.jumlah, d.jumlah from transaksi t join detail_transaksi d on t.no_transaksi=d.no_transaksi join barang b on d.kode_barang=b.kode_barang where tgl_transaksi >= '".$_GET['q']."' and tgl_transaksi <= '".$_GET['p']."'";
+		$sql = "select t.no_transaksi, t.tgl_transaksi, t.status, d.kode_barang, b.nama_barang, b.harga, k.harga, (b.harga*d.jumlah)+k.harga, b.harga*d.jumlah, d.jumlah from transaksi t join detail_transaksi d on t.no_transaksi=d.no_transaksi join barang b on d.kode_barang=b.kode_barang join pembeli p on p.kode_pembeli = t.kode_pembeli join kurir k on k.kode_kurir = p.kode_kurir where tgl_transaksi >= '".$_GET['q']."' and tgl_transaksi <= '".$_GET['p']."'";
 	}
 	  $qry = mysql_query($sql);
 	  while($data = mysql_fetch_array($qry)){
@@ -96,10 +98,15 @@ if(isset($_SESSION['login_admin'])){
           </tr>
           <tr>
             <td>Jumlah       :</td>
-            <td><?php echo $data[7]; ?></td>
+            <td><?php echo $data[9]; ?></td>
+          </tr>
+          <tr>
+            <td>Total       :</td>
+            <td><?php echo $data[8]; ?></td>
           </tr>
         </table></td>
-        <td><?php echo $data[6]; ?></td>
+         <td><?php echo $data[6]; ?></td>
+        <td><?php echo $data[7]; ?></td>
       </tr>
         <?php
 	  }

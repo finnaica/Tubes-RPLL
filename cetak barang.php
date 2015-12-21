@@ -9,7 +9,7 @@ if (isset($_SESSION['login_admin'])){
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>Laporan Barang - Toko Siliwangi</title>
 </head>
 
 <body onload="window.print();">
@@ -37,11 +37,11 @@ if (isset($_SESSION['login_admin'])){
 		?>
   	  <tr>
   	    <td bgcolor="#FFFFFF"><?php echo $no; ?></td>
-  	    <td bgcolor="#FFFFFF"><?php echo $data[1]; ?></td>
+  	    <td bgcolor="#FFFFFF"><?php echo $data[0]; ?></td>
   	    <td bgcolor="#FFFFFF"><?php echo $data[2]; ?></td>
+  	    <td bgcolor="#FFFFFF"><?php echo $data[5]; ?></td>
   	    <td bgcolor="#FFFFFF"><?php echo $data[3]; ?></td>
   	    <td bgcolor="#FFFFFF"><?php echo $data[4]; ?></td>
-  	    <td bgcolor="#FFFFFF"><?php echo $data[5]; ?></td>
 	    </tr>
   	  <?php
 		}

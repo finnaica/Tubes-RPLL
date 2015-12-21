@@ -26,7 +26,7 @@ session_start();
     <td align="right" bgcolor="#009900"><a href="index.php"><img src="gambar/home.jpg" width="42" height="35" /></a></td>
   </tr>
   <tr>
-    <td colspan="2" align="center" bgcolor="#DEE8FF"><table width="70%" border="0" align="center" cellpadding="4" cellspacing="0">
+    <td colspan="2" align="center" bgcolor="#DEE8FF"><table width="70%" border="4" align="center" cellpadding="4" cellspacing="0">
       <tr>
         <td align="center"><font size=2 face="Broadway, Geneva, sans-serif" color="#666666">No Transaksi</font></td>
         <td align="center"><font size=2 face="Broadway, Geneva, sans-serif" color="#666666">Tgl</font></td>
